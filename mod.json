@@ -1,0 +1,17 @@
+{
+	"Name": "VITALISED.ULTRAMenu",
+	"Description": "Fixes all the ugly UI and adds more stuff to menus",
+	"Version": "1.0.0",
+	"LoadPriority": 2,
+	"ConVars": [
+	],
+	"Scripts": [
+        {
+			"Path": "ui/menu_dialog_textentry.nut",
+			"RunOn": "UI",
+			"UICallback": {
+				"Before": "AddDialogTextEntry"
+			}
+		}
+	]
+}
