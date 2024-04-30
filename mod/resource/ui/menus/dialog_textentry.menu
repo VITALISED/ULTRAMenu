@@ -36,7 +36,7 @@ resource/ui/menus/dialog_textentry.menu
 		{
 			ControlName				RuiPanel
 			wide					%100
-			tall					564
+			tall					500
 			rui                     "ui/basic_image.rpak"
 			visible					1
 
