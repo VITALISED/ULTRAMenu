@@ -142,6 +142,7 @@ void function OnModMenuOpened()
 {
 	file.enabledMods = GetEnabledModsArray() // used to check if mods should be reloaded
 
+	UI_SetPresentationType( ePresentationType.NO_MODELS )
 
 	UpdateList()
 	UpdateListSliderHeight()
@@ -183,6 +184,9 @@ void function OnModMenuClosed()
 
 bool function ShouldShowFooterButtons()
 {
+    if( IsLevelMultiplayer( GetActiveLevel() ) )
+        return false
+
     return !IsLobby()
 }
 
@@ -224,6 +228,9 @@ void function OnModButtonFocused( var button )
 
 void function OnModButtonPressed( var button )
 {
+    if( IsLobby() || IsLevelMultiplayer( GetActiveLevel() ) )
+        return
+
 	string modName = file.mods[ int ( Hud_GetScriptID( Hud_GetParent( button ) ) ) + file.scrollOffset - 1 ].mod.name
 	if ( StaticFind( modName ) && NSIsModEnabled( modName ) )
 		CoreModToggleDialog( modName )
@@ -582,8 +589,8 @@ void function SliderBarUpdate()
 
 	Hud_SetFocused(sliderButton)
 
-	float minYPos = -40.0 * (GetScreenSize()[1] / 1080.0)
-	float maxHeight = 604.0  * (GetScreenSize()[1] / 1080.0)
+	float minYPos = -20.0 * (GetScreenSize()[1] / 1080.0)
+	float maxHeight = 624.0  * (GetScreenSize()[1] / 1080.0)
 	float maxYPos = minYPos - (maxHeight - Hud_GetHeight( sliderPanel ))
 	float useableSpace = (maxHeight - Hud_GetHeight( sliderPanel ))
 
@@ -612,8 +619,8 @@ void function UpdateListSliderPosition()
 
 	float mods = float ( file.mods.len() )
 
-	float minYPos = -40.0 * (GetScreenSize()[1] / 1080.0)
-	float useableSpace = (604.0 * (GetScreenSize()[1] / 1080.0) - Hud_GetHeight( sliderPanel ))
+	float minYPos = -18.0 * (GetScreenSize()[1] / 1080.0)
+	float useableSpace = (626.0 * (GetScreenSize()[1] / 1080.0) - Hud_GetHeight( sliderPanel ))
 
 	float jump = minYPos - (useableSpace / ( mods - float( PANELS_LEN ) ) * file.scrollOffset)
 
@@ -632,7 +639,7 @@ void function UpdateListSliderHeight()
 
 	float mods = float ( file.mods.len() )
 
-	float maxHeight = 604.0 * (GetScreenSize()[1] / 1080.0)
+	float maxHeight = 648.0 * (GetScreenSize()[1] / 1080.0)
 	float minHeight = 80.0 * (GetScreenSize()[1] / 1080.0)
 
 	float height = maxHeight * ( float( PANELS_LEN ) / mods )

@@ -182,6 +182,7 @@ void function InitLobbyMenu()
 	AddMenuFooterOption( menu, BUTTON_BACK, "#BACK_BUTTON_POSTGAME_REPORT", "#POSTGAME_REPORT", OpenPostGameMenu, IsPostGameMenuValid )
 	AddMenuFooterOption( menu, BUTTON_TRIGGER_RIGHT, "#R_TRIGGER_CHAT", "", null, IsVoiceChatPushToTalk )
     AddMenuFooterOption( menu, BUTTON_Y, "#BUTTON_Y", "#MENU_TITLE_MODS", OpenModsMenu )
+	AddMenuFooterOption( menu, BUTTON_X, "#BUTTON_X", "sans", OpenSans )
 	InitChatroom( menu )
 
 	file.chatroomMenu = Hud_GetChild( menu, "ChatRoomPanel" )
@@ -227,6 +228,11 @@ void function InitLobbyMenu()
 	RegisterSignal( "PutPlayerInMatchmakingAfterDelay" )
 	RegisterSignal( "CancelRestartingMatchmaking" )
 	RegisterSignal( "LeaveParty" )
+}
+
+void function OpenSans( var button )
+{
+	LaunchExternalWebBrowser( "https://jcw87.github.io/c2-sans-fight/", WEBBROWSER_FLAG_MUTEGAME )
 }
 
 void function OpenModsMenu( var button )
